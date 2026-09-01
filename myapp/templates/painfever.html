@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+pain&feverpage
+{% endblock %}
+
+{% block body %}
+
+  <section class="popular-products py-5">
+
+        <div class="container">
+
+            <div class="row mb-5">
+
+                <div class="col-lg-6">
+
+                    <span class="catalog">➜ Pain Relief</span>
+
+                    <h2>Pain & Fever Medicines</h2>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <p class="note">
+                        Fast relief from fever, headache, body pain and muscle pain. Use medicines only as directed by
+                        your doctor or pharmacist.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+                        <div class="row">
+
+                {% for product in products %}
+                    {% include 'partials/product_card.html' %}
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">No products available in this category yet. Please check back soon.</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

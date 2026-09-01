@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My Orders
+{% endblock %}
+
+{% block body %}
+
+<section class="popular-products py-5">
+
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <span class="catalog">➜ Order History</span>
+                <h2>My Orders {% if orders %}({{ orders|length }}){% endif %}</h2>
+            </div>
+        </div>
+
+        {% if orders %}
+        <div class="row">
+            <div class="col-12">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Items</th>
+                            <th>Total</th>
+                            <th>Payment</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td>#{{ order.id }}</td>
+                            <td>{{ order.created_at|date:"d M Y, h:i A" }}</td>
+                            <td>{{ order.items.count }} item{{ order.items.count|pluralize }}</td>
+                            <td>₹{{ order.total_amount }}</td>
+                            <td>{{ order.get_payment_method_display }}</td>
+                            <td>
+                                <span class="badge badge-{% if order.status == 'Delivered' %}success{% elif order.status == 'Cancelled' %}danger{% else %}warning{% endif %}">
+                                    {{ order.status }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{% url 'order_detail' order.id %}" class="btn btn-sm btn-outline-success">View</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">You haven't placed any orders yet.</p>
+            <a href="{% url 'shop' %}" class="btn btn-success px-5">Browse Medicines</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

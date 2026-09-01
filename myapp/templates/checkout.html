@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block body %}
+
+<section class="popular-products py-5">
+
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <span class="catalog">➜ Checkout</span>
+                <h2>Confirm Your Order</h2>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-lg-7">
+                <div class="upload-box">
+                    <h4 class="mb-4">Delivery Details</h4>
+
+                    <form method="POST" action="{% url 'checkout' %}">
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+                                <label>Full Name</label>
+                                <input type="text" name="full_name" class="form-control"
+                                    value="{{ request.user.get_full_name|default:request.user.username }}"
+                                    placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Phone Number</label>
+                                <input type="tel" name="phone_number" class="form-control"
+                                    placeholder="Enter phone number" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Email</label>
+                                <input type="email" name="email" class="form-control"
+                                    value="{{ request.user.email }}" placeholder="Enter email">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label>Payment Method</label>
+                                <select name="payment_method" class="form-select">
+                                    <option value="COD">Cash on Delivery</option>
+                                    <option value="Online">Online Payment</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label>Delivery Address</label>
+                                <textarea name="delivery_address" class="form-control" rows="3"
+                                    placeholder="Enter your full delivery address" required></textarea>
+                            </div>
+
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-success px-5 py-2">
+                                    Place Order
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="upload-box">
+                    <h4 class="mb-4">Order Summary</h4>
+
+                    <table class="table align-middle">
+                        <tbody>
+                            {% for row in cart_rows %}
+                            <tr>
+                                <td>
+                                    {{ row.item.product.name }}
+                                    <br><small class="text-muted">Qty: {{ row.item.quantity }}</small>
+                                </td>
+                                <td class="text-right">₹{{ row.subtotal }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <p class="d-flex justify-content-between mt-3">
+                        <strong>Total</strong>
+                        <strong>₹{{ total }}</strong>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

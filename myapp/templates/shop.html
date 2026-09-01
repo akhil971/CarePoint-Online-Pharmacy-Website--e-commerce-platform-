@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+shoppage
+{% endblock %}
+
+{% block body %}
+
+   <!--==========================
+    POPULAR PRODUCTS
+===========================-->
+
+    <section class="popular-products py-5">
+
+        <div class="container">
+
+            <div class="row mb-5">
+
+                <div class="col-lg-6">
+
+                    <span class="catalog">➜ Catalog</span>
+
+                    <h2>Popular Right Now</h2>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <p class="note">
+                        Items marked Rx require a valid prescription,
+                        verified by our pharmacist before dispatch.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Categories -->
+
+            <div class="category-list mb-5">
+
+                <button class="{% if not selected_category %}active{% endif %}"><a href="{% url 'shop' %}">All Medicines</a></button>
+
+                <button class="{% if selected_category == 'painfever' %}active{% endif %}"><a href="{% url 'shop' %}?category=painfever">Pain & Fever</a></button>
+
+                <button class="{% if selected_category == 'vitamins' %}active{% endif %}"><a href="{% url 'shop' %}?category=vitamins">Vitamins</a></button>
+
+                <button class="{% if selected_category == 'coldcough' %}active{% endif %}"><a href="{% url 'shop' %}?category=coldcough">Cold & Cough</a></button>
+
+                <button class="{% if selected_category == 'diabetes' %}active{% endif %}"><a href="{% url 'shop' %}?category=diabetes">Diabetes Care</a></button>
+
+                <button class="{% if selected_category == 'firstaid' %}active{% endif %}"><a href="{% url 'shop' %}?category=firstaid">First Aid</a></button>
+
+                <button class="{% if selected_category == 'skincare' %}active{% endif %}"><a href="{% url 'shop' %}?category=skincare">Skin Care</a></button>
+
+                <button class="{% if selected_category == 'babycare' %}active{% endif %}"><a href="{% url 'shop' %}?category=babycare">Baby Care</a></button>
+
+                <button class="{% if selected_category == 'devices' %}active{% endif %}"><a href="{% url 'shop' %}?category=devices">Devices & Monitors</a></button>
+
+            </div>
+
+
+                        <div class="row">
+
+                {% for product in products %}
+                    {% include 'partials/product_card.html' %}
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">No products found. Please check back soon.</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}

@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+aboutpage
+{% endblock %}
+
+{% block body %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | CarePoint</title>
+
+    <link rel="stylesheet" href="create-account.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+<body> -->
+
+    <div class="register-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="register-left">
+
+            <div class="brand">
+
+                <i class="fa-solid fa-plus"></i>
+
+                <span>CarePoint</span>
+
+            </div>
+
+            <h1>
+                Start your<br>
+                healthier journey.
+            </h1>
+
+            <p>
+                Create your CarePoint account to order medicines,
+                track your orders and consult trusted doctors online.
+            </p>
+
+            <div class="features">
+
+                <div>
+                    <i class="fa-solid fa-pills"></i>
+                    <span>Order Medicines Online</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-truck-medical"></i>
+                    <span>Track Your Orders</span>
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>Consult Trusted Doctors</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="register-right">
+
+            <div class="register-box">
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Join CarePoint today
+                </p>
+
+                <form method="POST" action="{% url 'register' %}">
+
+                    {% csrf_token %}
+
+
+                    <!-- Full Name -->
+
+                    <div class="input-group">
+
+                        <label>Full Name</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text" name="username"
+                                placeholder="Enter your full name"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Email -->
+
+                    <div class="input-group">
+
+                        <label>Email Address</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                type="email" name="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password" name="password1"
+                                id="password"
+                                placeholder="Create a password"
+                                required
+                            >
+
+                            <i class="fa-solid fa-eye password-eye"
+                               onclick="togglePassword('password', this)">
+                            </i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Confirm Password -->
+
+                    <div class="input-group">
+
+                        <label>Confirm Password</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input
+                                type="password" name="password2"
+                                id="confirmPassword"
+                                placeholder="Confirm your password"
+                                required
+                            >
+
+                            <i class="fa-solid fa-eye password-eye"
+                               onclick="togglePassword('confirmPassword', this)">
+                            </i>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Terms -->
+
+                    <div class="terms">
+
+                        <label>
+
+                            <input type="checkbox" required>
+
+                            I agree to the
+                            <a href="#">Terms & Conditions</a>
+                            and
+                            <a href="#">Privacy Policy</a>
+
+                        </label>
+
+                    </div>
+
+
+                    <!-- Create Account Button -->
+
+                    <button type="submit" class="register-btn">
+
+                        <i class="fa-solid fa-user-plus"></i>
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+
+                <!-- Login -->
+
+                <p class="login-text">
+
+                    Already have an account?
+
+                    <a href="{% url 'login' %}">
+                        Login
+                    </a>
+
+                </p>
+
+
+                <!-- Back Home -->
+
+                <a href="{% url 'home' %}" class="back-home">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+
+                    Back to Home
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function togglePassword(id, icon){
+
+            const password =
+                document.getElementById(id);
+
+            if(password.type === "password"){
+
+                password.type = "text";
+
+                icon.classList.remove("fa-eye");
+
+                icon.classList.add("fa-eye-slash");
+
+            }
+            else{
+
+                password.type = "password";
+
+                icon.classList.remove("fa-eye-slash");
+
+                icon.classList.add("fa-eye");
+
+            }
+
+        }
+
+    </script>
+
+<!-- </body>
+
+</html> -->
+{% endblock %}

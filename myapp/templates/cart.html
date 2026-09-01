@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+My Cart
+{% endblock %}
+
+{% block body %}
+
+<section class="popular-products py-5">
+
+    <div class="container">
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <span class="catalog">➜ Your Cart</span>
+                <h2>My Cart {% if cart_rows %}({{ cart_rows|length }} item{{ cart_rows|length|pluralize }}){% endif %}</h2>
+            </div>
+        </div>
+
+        {% if cart_rows %}
+        <div class="row">
+            <div class="col-lg-8">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in cart_rows %}
+                        <tr id="cart-row-{{ row.item.product.id }}">
+                            <td>
+                                <strong>{{ row.item.product.name }}</strong><br>
+                                <small class="text-muted">{{ row.item.product.description }}</small>
+                            </td>
+                            <td>₹{{ row.item.product.price }}</td>
+                            <td>{{ row.item.quantity }}</td>
+                            <td>₹{{ row.subtotal }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-danger"
+                                    onclick="removeFromCart({{ row.item.product.id }})">
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="upload-box">
+                    <h4>Order Summary</h4>
+                    <p class="d-flex justify-content-between mt-3">
+                        <span>Total</span>
+                        <strong>₹{{ total }}</strong>
+                    </p>
+                    <a href="{% url 'checkout' %}" class="btn btn-success btn-block px-5">Proceed to Checkout</a>
+                    <a href="{% url 'shop' %}" class="btn btn-outline-success btn-block px-5 mt-2">Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <p class="text-muted">Your cart is empty.</p>
+            <a href="{% url 'shop' %}" class="btn btn-success px-5">Browse Medicines</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+</section>
+
+<script>
+    function removeFromCart(productId) {
+        fetch(`/cart/remove/${productId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+                'X-Requested-With': 'XMLHttpRequest',
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                document.getElementById('cart-count').textContent = data.cart_count;
+                const row = document.getElementById(`cart-row-${productId}`);
+                if (row) row.remove();
+                if (data.cart_count === 0) {
+                    location.reload();
+                }
+            }
+        });
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,120 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+contactpage
+{% endblock %}
+
+{% block body %}
+
+<section class="enquiry-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="enquiry-box">
+
+                    <div class="text-center mb-4">
+
+                        <span class="sub-title">
+                            ➜ Contact Us
+                        </span>
+
+                        <h2>Write Your Enquiry</h2>
+
+                        <p>
+                            Have a question about medicines, orders, or healthcare?
+                            Fill out the form below and we'll get back to you shortly.
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            <div class="col-md-6 mb-3">
+
+                                <label>Full Name</label>
+
+                                <input type="text" name="name"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                                required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label>Mobile Number</label>
+
+                                <input type="tel"  name="phone_number" 
+                                class="form-control"
+                                placeholder="Enter your mobile number"
+                                required>
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label>Email Address</label>
+
+                                <input type="email" name="email"
+                                class="form-control"
+                                placeholder="Enter your email">
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label>Subject</label>
+
+                                <input type="text" name="subject"
+                                class="form-control"
+                                placeholder="Enter subject"
+                                required>
+
+                            </div>
+
+                            <div class="col-12 mb-3">
+
+                                <label>Your Message</label>
+
+                                <textarea
+                                class="form-control" name="message"
+                                rows="6"
+                                placeholder="Write your enquiry here..."
+                                required></textarea>
+
+                            </div>
+
+                            <div class="col-12 text-center">
+
+                                <button type="submit" class="enquiry-btn">
+
+                                    <i class="fa-solid fa-paper-plane"></i>
+
+                                    Send Enquiry
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+{% endblock %}

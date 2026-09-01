@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CarePoint{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- --------------------------------------------HEADER---------------------------------------- -->
+
+    <section class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ll">
+                    <h5>
+                        <i class="fa-solid fa-shield-heart"></i> Licensed Pharmacy · Reg. #PH-4471
+                    </h5>
+                </div>
+                <!-- <div class="col-md-2 hp">
+                    <h5>
+                        <a href="#"> <i class="fa-regular fa-heart hh"></i></a>
+                        <a href="#"><i class="fa-solid fa-cart-plus kk"></i></a>
+                    </h5>
+                </div> -->
+
+                <div class="col-md-6 rr">
+                    <h5>
+                        <i class="fa-regular fa-truck"></i> Free delivery on orders over ₹499
+                    </h5>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- --------------------------------------------NAVBAR-------------------------------------------------------- -->
+
+
+    <header class="header-area">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-3">
+                    <a href="#" class="logo">
+                        <span> <i class="fa-solid fa-plus"></i>CarePoint</span>
+                    </a>
+                </div>
+
+                <div class="col-md-6 ss">
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control search-input" placeholder="Search for products">
+                            <div class="input-group-append">
+                                <button class="btn search-btn">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="header-icons">
+                        <a href="{% url 'wishlist' %}" class="icon-box">
+                            <i class="far fa-heart"></i>
+                            <span id="wishlist-count">{{ wishlist_count }}</span>
+                        </a>
+                        <a href="{% url 'cart' %}" class="icon-box">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count">{{ cart_count }}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--==========================
+            NAVBAR
+    ===========================-->
+
+    <section class="menu-area">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-dark p-0">
+                <a class="navbar-brand d-lg-none" href="#">
+                    Care<span>Point</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'doctor' %}">Consult a doctor</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'prescription' %}">Upload prescription</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                        </li>
+                        {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'my_orders' %}">My Orders</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <span class="nav-link welcome-user">
+                                Welcome, {{ user.username }}
+                            </span>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">
+                                Logout
+                            </a>
+                        </li>
+
+                        {% else %}
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">
+                                Login
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">
+                                Register
+                            </a>
+                        </li>
+
+                        {% endif %}
+                    </ul>
+                    <!-- <a href="#" class="sale-btn">
+                        20% OFF
+                    </a> -->
+                </div>
+
+            </nav>
+        </div>
+    </section>
+
+    {% block body %}{% endblock %}
+
+    <!-- ------------------------------------------FOOTER---------------------------------- -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Company -->
+
+                <div class="col-lg-4 col-md-6 mb-4">
+
+                    <h3 class="logo">
+                        <i class="fa-solid fa-plus"></i> CarePoint
+                    </h3>
+
+                    <p>
+                        A trusted online pharmacy delivering genuine medicines,
+                        healthcare products and expert doctor consultations at
+                        your doorstep.
+                    </p>
+
+                    <div class="social">
+
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Shop -->
+
+                <div class="col-lg-2 col-md-6 mb-4">
+
+                    <h4>Shop</h4>
+
+                    <ul>
+
+                        <li><a href="{% url 'shop' %}">Categories</a></li>
+
+                        <li><a href="{% url 'shop' %}">All Medicines</a></li>
+
+                        <li><a href="{% url 'doctor' %}">Consult a Doctor</a></li>
+
+                        <li><a href="{% url 'prescription' %}">Upload Prescription</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Support -->
+
+                <div class="col-lg-3 col-md-6 mb-4">
+
+                    <h4>Support</h4>
+
+                    <ul>
+
+                        <li><a href="#">Track Order</a></li>
+
+                        <li><a href="#">Talk to Pharmacist</a></li>
+
+                        <li><a href="#">Returns & Refunds</a></li>
+
+                        <li><a href="#">Help Center</a></li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Contact -->
+
+                <div class="col-lg-3 col-md-6 mb-4">
+
+                    <h4>Contact</h4>
+
+                    <ul>
+
+                        <li><i class="fa-solid fa-phone"></i> +91 9876543210</li>
+
+                        <li><i class="fa-solid fa-envelope"></i> info@carepoint.com</li>
+
+                        <li><i class="fa-solid fa-location-dot"></i> Ranchi, Jharkhand</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+
+
+        </div>
+
+    </footer>
+
+    <!-- --------------------------------COPYRIGHT--------------------------- -->
+
+    <section class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 ll">
+                    <h4>@ 2026 Care Point. All rights reserved.</h4>
+                </div>
+                <div class="col-md-6 rr">
+                    <h5>Maintained by AKHIL</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <!-- SweetAlert2 (used for login/register/logout popups) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Wishlist / Cart AJAX handling -->
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+        function toggleWishlist(el) {
+            const productId = el.getAttribute('data-product-id');
+
+            fetch(`/wishlist/toggle/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(res => {
+                if (res.status === 403 || res.redirected) {
+                    window.location.href = "{% url 'login' %}";
+                    return null;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (!data) return;
+                if (data.status === 'ok') {
+                    el.classList.toggle('active', data.liked);
+                    document.getElementById('wishlist-count').textContent = data.wishlist_count;
+                }
+            })
+            .catch(() => {});
+        }
+
+        function addToCart(el) {
+            const productId = el.getAttribute('data-product-id');
+
+            fetch(`/cart/add/${productId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            })
+            .then(res => {
+                if (res.status === 403 || res.redirected) {
+                    window.location.href = "{% url 'login' %}";
+                    return null;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (!data) return;
+                if (data.status === 'ok') {
+                    document.getElementById('cart-count').textContent = data.cart_count;
+
+                    const original = el.textContent;
+                    el.textContent = 'Added ✓';
+                    setTimeout(() => { el.textContent = original; }, 1200);
+                }
+            })
+            .catch(() => {});
+        }
+    </script>
+
+    {% if messages %}
+    <script>
+        {% for message in messages %}
+            Swal.fire({
+                icon: "{% if message.tags == 'error' %}error{% elif message.tags == 'warning' %}warning{% else %}success{% endif %}",
+                title: "{% if message.tags == 'error' %}Error{% else %}Success{% endif %}",
+                text: "{{ message|escapejs }}",
+                confirmButtonColor: "#0d6efd",
+                timer: 2500,
+                timerProgressBar: true
+            });
+        {% endfor %}
+    </script>
+    {% endif %}
+
+</body>
+
+</html>

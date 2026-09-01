@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+devices_monitor_page
+{% endblock %}
+
+{% block body %}
+  <section class="popular-products py-5">
+
+        <div class="container">
+
+            <!-- Heading -->
+
+            <div class="row mb-5 align-items-center">
+
+                <div class="col-lg-6">
+
+                    <span class="catalog">➜ Medical Devices</span>
+
+                    <h2>Devices & Monitors</h2>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <p class="note">
+                        Monitor your health with reliable medical devices and home healthcare equipment.
+                    </p>
+
+                </div>
+
+            </div>
+
+                        <div class="row">
+
+                {% for product in products %}
+                    {% include 'partials/product_card.html' %}
+                {% empty %}
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">No products available in this category yet. Please check back soon.</p>
+                    </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+{% endblock %}

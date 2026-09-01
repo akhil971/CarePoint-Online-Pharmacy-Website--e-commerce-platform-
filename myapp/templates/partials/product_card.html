@@ -1,0 +1,48 @@
+{% load static %}
+<div class="col-lg-3 col-md-6 mb-4">
+
+    <div class="product-card">
+
+        <div class="product-img">
+
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="img-fluid">
+            {% else %}
+            <img src="{% static 'img/e1.jpg' %}" class="img-fluid">
+            {% endif %}
+
+            <span class="tag">{{ product.tag }}</span>
+
+            <span class="heart {% if product.id in wishlist_ids %}active{% endif %}"
+                data-product-id="{{ product.id }}"
+                onclick="toggleWishlist(this)">
+                ❤
+            </span>
+
+        </div>
+
+        <div class="product-body">
+
+            <small>{{ product.label|default:product.get_category_display }}</small>
+
+            <h3>{{ product.name }}</h3>
+
+            <p>{{ product.description }}</p>
+
+            <div class="price">
+
+                <h4>₹{{ product.price }}</h4>
+
+                {% if product.old_price %}
+                <del>₹{{ product.old_price }}</del>
+                {% endif %}
+
+                <button data-product-id="{{ product.id }}" onclick="addToCart(this)">Add</button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

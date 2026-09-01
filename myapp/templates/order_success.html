@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Order Placed
+{% endblock %}
+
+{% block body %}
+
+<section class="upload-prescription py-5">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="upload-box text-center">
+
+                    <i class="fa-solid fa-circle-check" style="font-size: 60px; color: #28a745;"></i>
+
+                    <h2 class="mt-3">Order Placed Successfully!</h2>
+
+                    <p class="mb-1">Your Order ID is <strong>#{{ order.id }}</strong></p>
+                    <p class="text-muted">We'll deliver to: {{ order.delivery_address }}</p>
+
+                    <table class="table align-middle mt-4 text-left">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.items.all %}
+                            <tr>
+                                <td>{{ item.product_name }}</td>
+                                <td>{{ item.quantity }}</td>
+                                <td>₹{{ item.price }}</td>
+                                <td>₹{{ item.subtotal }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <p class="d-flex justify-content-between">
+                        <strong>Total Paid</strong>
+                        <strong>₹{{ order.total_amount }}</strong>
+                    </p>
+
+                    <p><strong>Payment Method:</strong> {{ order.get_payment_method_display }}</p>
+                    <p><strong>Status:</strong> {{ order.status }}</p>
+
+                    <div class="mt-4">
+                        <a href="{% url 'my_orders' %}" class="btn btn-success px-5">View My Orders</a>
+                        <a href="{% url 'shop' %}" class="btn btn-outline-success px-5 ml-2">Continue Shopping</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
