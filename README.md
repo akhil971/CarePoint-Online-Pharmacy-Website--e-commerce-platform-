@@ -1,2 +1,6 @@
-# CarePoint-Online-Pharmacy-Website-
-A responsive Online Pharmacy website developed using HTML, CSS, and basic Django, featuring medicine categories, product listings, search, shopping cart, wishlist, prescription upload, Book Consultation(Doctor's Appointment), and user-friendly navigation.
+## Copyright
+
+© 2026 Akhil Kumar. All rights reserved.
+
+This project and its source code are the original work of Akhil Kumar.
+Unauthorized copying, modification, distribution, or commercial use is not permitted without permission.
